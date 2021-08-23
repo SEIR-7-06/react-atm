@@ -28,10 +28,16 @@ class Account extends Component {
     handleWithdraw = (e) => {
         console.log('withdraw ' + this.state.amount );
         e.preventDefault()
-        this.setState({
+
+        if (this.state.balance < this.state.amount) {
+            console.log('NOT ENOUGH FUNDS');
+        }
+         else {
+             this.setState({
             balance: this.state.balance - Number(this.state.amount)
-        })
-        
+          })
+        } 
+        this.setAmount(0) 
     }
 
 
