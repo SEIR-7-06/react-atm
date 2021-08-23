@@ -43,6 +43,7 @@ class Account extends Component {
                         onChange={ e => this.setAmount(e.target.value) }
                     />
                     <input type="submit" value="Deposit" />
+                    <input type="submit" value="Withdraw" />
                 </form>
             </div>
         )
