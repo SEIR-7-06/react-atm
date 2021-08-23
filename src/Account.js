@@ -10,8 +10,8 @@ class Account extends Component {
     // {/* Deposit */}
     handleDepositSubmit = e => {
         e.preventDefault()
-        if (isNaN(this.state.depositAmount)) {
-            console.log("Not a number")
+        if (isNaN(this.state.depositAmount) || this.state.depositAmount < 0) {
+            console.log("Not valid")
         }
 
         else {
@@ -25,8 +25,8 @@ class Account extends Component {
     // {/* Withdraw */}
     handleWithdrawSubmit = e => {
         e.preventDefault()
-        if (isNaN(this.state.withdrawAmount)) {
-            console.log("Not a number")
+        if (isNaN(this.state.withdrawAmount) || this.state.withdrawAmount < 0) {
+            console.log("Not valid")
         }
         else if (this.state.balance <= this.state.withdrawAmount) { 
             alert("You do not have enough funds.")
