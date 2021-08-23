@@ -25,6 +25,16 @@ class Account extends Component {
         })
     }
 
+    handleWithdraw = (e) => {
+        console.log('withdraw ' + this.state.amount );
+        e.preventDefault()
+        this.setState({
+            balance: this.state.balance - Number(this.state.amount)
+        })
+        
+    }
+
+
     render () {
         let balanceClass = 'balance'
         if (this.state.balance <= 0) {
@@ -43,7 +53,9 @@ class Account extends Component {
                         onChange={ e => this.setAmount(e.target.value) }
                     />
                     <input type="submit" value="Deposit" />
+                    <button onClick={this.handleWithdraw} type="submit" value="Withdraw">Withdraw</button>
                 </form>
+               
             </div>
         )
     }
