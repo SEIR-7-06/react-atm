@@ -6,7 +6,7 @@ class Account extends Component {
         balance: 0
     }
     
-    handleSubmit = e => {
+    handleDeposit = e => {
         e.preventDefault()
         if (isNaN(this.state.amount)) {
             console.log("Not a number")
@@ -19,10 +19,29 @@ class Account extends Component {
         this.setAmount(0)
     }
 
+    handleWithdrawl = e => {
+        e.preventDefault()
+        if (isNaN(this.state.amount)) {
+            console.log("Not a number.")
+        }  
+        if (this.state.amount > this.state.balance) {
+            alert("You don't have enough money!")
+        } else {
+            this.setState ({
+                balance: this.state.balance - Number(this.state.amount)
+            })
+        }
+        this.setAmount(0)
+    }
+
     setAmount = amount => {
-        this.setState({
-            amount: amount
-        })
+        if (amount < 0) {
+            alert("Choose a number larger than zero!")
+        } else {
+            this.setState({
+                amount: amount
+            })
+        }
     }
 
     render () {
@@ -35,14 +54,15 @@ class Account extends Component {
             <div className="account">
                 <h2>{this.props.name}</h2>
                 <div className={balanceClass}>${this.state.balance}</div>
-                <form onSubmit={this.handleSubmit}>
+                <form >
                     <input 
                         type="text" 
                         placeholder="enter an amount" 
                         value={this.state.amount} 
                         onChange={ e => this.setAmount(e.target.value) }
                     />
-                    <input type="submit" value="Deposit" />
+                    <input onClick = {this.handleDeposit} type="submit" value="Deposit" />
+                    <input onClick = {this.handleWithdrawl} type="submit" value="Withdraw" />
                 </form>
             </div>
         )
