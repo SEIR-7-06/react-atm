@@ -3,10 +3,12 @@ import React from 'react';
 
 // Custom Components
 import Account from './Account';
+import Savings from './components/Savings';
 
 // Resources
 import logo from './ga.png';
 import './App.css';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <div id="title">Bank of GA</div>
       </div>
       <Account name="Checking" />
+      <Savings name="Savings" />
       <div className="clear"></div>
     </div>
   );

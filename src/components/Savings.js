@@ -1,6 +1,10 @@
-import { Component } from 'react'
+import React from 'react'
 
-class Account extends Component {
+
+
+
+
+class Savings extends React.Component {
     state = {
         amount: 0,
         balance: 0
@@ -72,4 +76,6 @@ class Account extends Component {
     )
 }
 }
-export default Account
+
+
+export default Savings
