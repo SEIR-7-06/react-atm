@@ -1,0 +1,7 @@
+1. withdraw next to depost
+    - no withdrawing more than current amount ✅
+
+2. savings account
+    - same deposit/withdrawm function  ✅
+
+3. no negative numbers

@@ -6,14 +6,32 @@ class Account extends Component {
         balance: 0
     }
     
-    handleSubmit = e => {
+    handleDeposit = e => {
         e.preventDefault()
-        if (isNaN(this.state.amount)) {
-            console.log("Not a number")
+        if (isNaN(this.state.amount) || (this.state.amount) < 0) {
+            return console.log("Not a number")
         }
         else {
             this.setState({
                 balance: this.state.balance + Number(this.state.amount)
+            })
+        }
+        this.setAmount(0)
+    }
+
+    setAmount = amount => {
+        this.setState({
+            amount: amount
+        })
+    }
+    handleWithdraw = e => {
+        e.preventDefault()
+        if (isNaN(this.state.amount) || (this.state.amount) < 0 ) {
+             return console.log("Not a number")
+        }
+        else {
+            this.setState({
+                balance: this.state.balance - Number(this.state.amount)
             })
         }
         this.setAmount(0)
@@ -35,15 +53,21 @@ class Account extends Component {
             <div className="account">
                 <h2>{this.props.name}</h2>
                 <div className={balanceClass}>${this.state.balance}</div>
-                <form onSubmit={this.handleSubmit}>
+
+                <form onSubmit={this.handleDeposit}>
                     <input 
                         type="text" 
                         placeholder="enter an amount" 
                         value={this.state.amount} 
                         onChange={ e => this.setAmount(e.target.value) }
                     />
-                    <input type="submit" value="Deposit" />
+                    <input type="submit" value="Deposit"  />
+                    </form>
+
+                <form onSubmit={this.handleWithdraw}>
+                    <input type="submit" value="Withdraw"  />
                 </form>
+
             </div>
         )
     }
