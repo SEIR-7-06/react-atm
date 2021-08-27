@@ -8,8 +8,8 @@ class Account extends Component {
     
     handleSubmit = e => {
         e.preventDefault()
-        if (isNaN(this.state.amount)) {
-            console.log("Not a number")
+        if (isNaN(this.state.amount) || (this.state.amount <= 0)) {
+            console.log("Not Valid")
         }
         else {
             this.setState({
@@ -24,6 +24,25 @@ class Account extends Component {
             amount: amount
         })
     }
+
+    handleWithdraw = (e) => {
+        // console.log('withdraw ' + this.state.amount );
+        e.preventDefault()
+
+        if (isNaN(this.state.amount) || (this.state.amount <= 0)) {
+            console.log("Not Valid")
+        }
+        else if (this.state.balance < this.state.amount) {
+            console.log('NOT ENOUGH FUNDS');
+        } else {
+            this.setState({
+                balance: this.state.balance - Number(this.state.amount)
+              })
+        }
+    
+        this.setAmount(0) 
+    }
+
 
     render () {
         let balanceClass = 'balance'
@@ -43,7 +62,9 @@ class Account extends Component {
                         onChange={ e => this.setAmount(e.target.value) }
                     />
                     <input type="submit" value="Deposit" />
+                    <button onClick={this.handleWithdraw} type="submit" value="Withdraw">Withdraw</button>
                 </form>
+               
             </div>
         )
     }

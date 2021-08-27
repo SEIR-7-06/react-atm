@@ -4,6 +4,7 @@ import React from 'react';
 // Custom Components
 import Account from './Account';
 
+
 // Resources
 import logo from './ga.png';
 import './App.css';
@@ -16,6 +17,8 @@ function App() {
         <div id="title">Bank of GA</div>
       </div>
       <Account name="Checking" />
+      <Account name="Savings" />
+     
       <div className="clear"></div>
     </div>
   );
