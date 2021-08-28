@@ -1,12 +1,12 @@
 import { Component } from 'react'
 
-class Account extends Component {
+class Savings extends Component {
     state = {
         amount: 0,
         balance: 0
     }
     
-    handleDeposit = e => {
+    handleSubmit = e => {
         e.preventDefault()
         if (isNaN(this.state.amount)) {
             console.log("Not a number")
@@ -17,23 +17,6 @@ class Account extends Component {
             this.setState({
                 balance: this.state.balance + Number(this.state.amount)
             })
-        }
-        this.setAmount(0)
-    }
-
-    handleWithdraw = e => {
-        e.preventDefault()
-        if (isNaN(this.state.amount)) {
-            console.log("Not a number")
-        } 
-        else if (this.state.amount < 0) {
-            console.log("Enter a positive number")
-        }
-        else if (this.state.balance < this.state.amount) {
-             console.log('Insufficient funds')
-        }
-        else if (this.state.balance >= this.state.amount) {
-            this.setState({ balance: this.state.balance + Number(this.state.amount)})
         }
         this.setAmount(0)
     }
@@ -54,19 +37,19 @@ class Account extends Component {
             <div className="account">
                 <h2>{this.props.name}</h2>
                 <div className={balanceClass}>${this.state.balance}</div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <input 
                         type="text" 
                         placeholder="enter an amount" 
                         value={this.state.amount} 
                         onChange={ e => this.setAmount(e.target.value) }
                     />
-                    <input type="submit" value="Deposit" onClick={this.handleDeposit} />
-                    <input type="submit" value="Withdraw" onClick={this.handleWithdraw} />
+                    <input type="submit" value="Deposit" />
+                    <input type="submit" value="Withdraw" />
                 </form>
             </div>
         )
     }
 }
 
-export default Account
+export default Savings
