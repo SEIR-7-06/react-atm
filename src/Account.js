@@ -6,14 +6,26 @@ class Account extends Component {
         balance: 0
     }
     
-    handleSubmit = e => {
+    depositSubmit = e => {
         e.preventDefault()
-        if (isNaN(this.state.amount)) {
-            console.log("Not a number")
+        if (isNaN(this.state.amount) || this.state.amount < 0) {
+            console.log("Not possible")
         }
         else {
             this.setState({
                 balance: this.state.balance + Number(this.state.amount)
+            })
+        }
+        this.setAmount(0)
+    }
+    withdrawlSubmit = e => {
+        e.preventDefault()
+        if (isNaN(this.state.amount) || this.state.balance - Number(this.state.amount) < 0 || this.state.amount < 0) {
+            console.log("Not Possible")
+        }
+        else {
+            this.setState({
+                balance: this.state.balance - Number(this.state.amount)
             })
         }
         this.setAmount(0)
@@ -35,7 +47,7 @@ class Account extends Component {
             <div className="account">
                 <h2>{this.props.name}</h2>
                 <div className={balanceClass}>${this.state.balance}</div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.depositSubmit}>
                     <input 
                         type="text" 
                         placeholder="enter an amount" 
@@ -43,6 +55,15 @@ class Account extends Component {
                         onChange={ e => this.setAmount(e.target.value) }
                     />
                     <input type="submit" value="Deposit" />
+                </form>
+                <form onSubmit={this.withdrawlSubmit}>
+                    <input 
+                        type="text" 
+                        placeholder="enter an amount" 
+                        value={this.state.amount} 
+                        onChange={ e => this.setAmount(e.target.value) }
+                    />
+                    <input type='submit' value='Withdrawl' />
                 </form>
             </div>
         )
