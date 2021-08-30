@@ -19,10 +19,39 @@ class Account extends Component {
         this.setAmount(0)
     }
 
+//////////////
+    handleWithdraw = e => { 
+        e.preventDefault()
+        if (isNaN(this.state.amount)) {
+            console.log("Not a number")
+        }
+        else if (this.state.balance < Number(this.state.amount))
+        console.log('you cannot take out more thank what you have!')
+        else
+        this.setState({
+            balance: this.state.balance - Number(this.state.amount)
+        })
+    }
+
+////////////////
+//  preventNegative = (e) => {
+// if (this.state.balance < 0) {   
+//             e.preventDefault() 
+//         }
+//////////////////////////////////////
+//     onChange = (e) => {
+//     if (this.state.balance < 0 || this.state.balance >= 0) {
+//       this.setState(this.state.balance);
+//     }
+//   }
+
+/////////////////////
     setAmount = amount => {
         this.setState({
             amount: amount
         })
+        // if (this.amount > 0){  
+        // }
     }
 
     render () {
@@ -30,7 +59,6 @@ class Account extends Component {
         if (this.state.balance <= 0) {
             balanceClass += ' zero'
         }
-
         return (
             <div className="account">
                 <h2>{this.props.name}</h2>
@@ -43,6 +71,10 @@ class Account extends Component {
                         onChange={ e => this.setAmount(e.target.value) }
                     />
                     <input type="submit" value="Deposit" />
+                </form>
+                <form onSubmit={this.handleWithdraw}>
+                <input type="submit" value="Withdraw" 
+                onChange={ e => this.setAmount(e.target.value) }/>
                 </form>
             </div>
         )
